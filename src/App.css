@@ -49,6 +49,11 @@
     height: 80%;
     max-width: none;
   }
+
+  .popup-content {
+    max-height: 200px;
+    overflow-y: auto;
+  }
 }
 
 
