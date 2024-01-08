@@ -51,8 +51,8 @@
   }
 
   .popup-content {
+    max-height: 400px;
     overflow-y: auto;
-    height: 75%;
   }
 }
 
