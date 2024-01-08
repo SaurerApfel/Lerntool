@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/Lerntool/static/css/main.0478f0d0.css",
-    "main.js": "/Lerntool/static/js/main.a6f2dc92.js",
+    "main.css": "/Lerntool/static/css/main.d2979f99.css",
+    "main.js": "/Lerntool/static/js/main.521d3dd5.js",
     "static/js/787.d84019bb.chunk.js": "/Lerntool/static/js/787.d84019bb.chunk.js",
+    "static/media/Unicode.pdf": "/Lerntool/static/media/Unicode.926d4580c3f2a0ac677e.pdf",
     "static/media/tempel8.jpeg": "/Lerntool/static/media/tempel8.c85dfa294f4fd6ea0563.jpeg",
     "static/media/tempel7.jpeg": "/Lerntool/static/media/tempel7.0b7b196f1c0b39aa9cee.jpeg",
     "static/media/tempel2.jpeg": "/Lerntool/static/media/tempel2.0c0f1b59bf433f19109a.jpeg",
@@ -17,12 +18,12 @@
     "static/media/tempel4.jpeg": "/Lerntool/static/media/tempel4.85c4964a5912dd180317.jpeg",
     "static/media/Ascii.pdf": "/Lerntool/static/media/Ascii.c7f5613577f040cf74cb.pdf",
     "index.html": "/Lerntool/index.html",
-    "main.0478f0d0.css.map": "/Lerntool/static/css/main.0478f0d0.css.map",
-    "main.a6f2dc92.js.map": "/Lerntool/static/js/main.a6f2dc92.js.map",
+    "main.d2979f99.css.map": "/Lerntool/static/css/main.d2979f99.css.map",
+    "main.521d3dd5.js.map": "/Lerntool/static/js/main.521d3dd5.js.map",
     "787.d84019bb.chunk.js.map": "/Lerntool/static/js/787.d84019bb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0478f0d0.css",
-    "static/js/main.a6f2dc92.js"
+    "static/css/main.d2979f99.css",
+    "static/js/main.521d3dd5.js"
   ]
 }
