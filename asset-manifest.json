@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/lerntool/static/css/main.284b987b.css",
-    "main.js": "/lerntool/static/js/main.c1e01b2c.js",
+    "main.js": "/lerntool/static/js/main.dedc34df.js",
     "static/js/787.d84019bb.chunk.js": "/lerntool/static/js/787.d84019bb.chunk.js",
     "static/media/tempel8.jpeg": "/lerntool/static/media/tempel8.c85dfa294f4fd6ea0563.jpeg",
     "static/media/tempel7.jpeg": "/lerntool/static/media/tempel7.0b7b196f1c0b39aa9cee.jpeg",
@@ -18,11 +18,11 @@
     "static/media/Ascii.pdf": "/lerntool/static/media/Ascii.c7f5613577f040cf74cb.pdf",
     "index.html": "/lerntool/index.html",
     "main.284b987b.css.map": "/lerntool/static/css/main.284b987b.css.map",
-    "main.c1e01b2c.js.map": "/lerntool/static/js/main.c1e01b2c.js.map",
+    "main.dedc34df.js.map": "/lerntool/static/js/main.dedc34df.js.map",
     "787.d84019bb.chunk.js.map": "/lerntool/static/js/787.d84019bb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.284b987b.css",
-    "static/js/main.c1e01b2c.js"
+    "static/js/main.dedc34df.js"
   ]
 }
