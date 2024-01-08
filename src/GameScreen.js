@@ -36,7 +36,6 @@ function GameScreen() {
     const [solvedTasks, setSolvedTasks] = useState(Array.from({ length: 10 }, () => []));
     const [showGame, setShowGame] = useState(false);
     const [animationComplete, setAnimationComplete] = useState(false);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [asciiModalIsOpen, setAsciiModalIsOpen] = useState(false);
     const [unicodeModalIsOpen, setUnicodeModalIsOpen] = useState(false);
     const [resultModalIsOpen, setResultModalIsOpen] = useState(false);
@@ -78,19 +77,14 @@ function GameScreen() {
         return () => clearTimeout(timeoutID);
       }, []);
 
-      const openModal = () => {
-        setModalIsOpen(true);
-      }
-    
-      const closeModal = () => {
-        setModalIsOpen(false);
-      }
+  
 
       const AsciiModal = ({ isOpen, closeModal }) => (
         <Modal
           isOpen={isOpen}
           onRequestClose={closeModal}
           contentLabel="ASCII Erklärung"
+          ariaHideApp={false}
           style={{
             content: {
               display: 'flex',
@@ -112,6 +106,7 @@ function GameScreen() {
           isOpen={isOpen}
           onRequestClose={closeModal}
           contentLabel="Unicode Erklärung"
+          ariaHideApp={false}
           style={{
             content: {
               display: 'flex',
@@ -124,21 +119,6 @@ function GameScreen() {
           <div>
             <button className="ModalButton" onClick={closeModal}>Schließen</button>
             <UnicodeExpl/>
-          </div>
-        </Modal>
-      );
-
-      const ResultModal = ({ isOpen, closeModal }) => (
-        <Modal
-          isOpen={isOpen}
-          onRequestClose={closeModal}
-          contentLabel="Ergebnis"
-        
-        >
-          <div>
-            <h2>Herzlichen Glückwunsch!</h2>
-            <p>Du hast alle Aufgaben erfolgreich gelöst!</p>
-            <button onClick={closeModal}>Schließen</button>
           </div>
         </Modal>
       );
@@ -275,7 +255,7 @@ function GameScreen() {
     }
     };
 
-      return showGame ? (
+      return (
         <div className="game-container">
   <div className="level-bar">
     {Array.from({ length: 10 }, (_, index) => (
@@ -351,6 +331,7 @@ function GameScreen() {
             )}
           </div>
         </div>
-      ) : null;
-          }      
+      )
+          }    
+    
 export default GameScreen;

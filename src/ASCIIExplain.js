@@ -16,12 +16,11 @@ const ASCIIExpl = () => {
         <Document
           file={file}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-          renderMode="svg"
         >
           <Page pageNumber={1} 
               renderTextLayer={false}
               renderAnnotationLayer={false}
-              customTextRenderer={false}
+              customTextRenderer={() => {}}
               />
         </Document>
       </div>
