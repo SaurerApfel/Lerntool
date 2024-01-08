@@ -39,6 +39,7 @@ function GameScreen() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [asciiModalIsOpen, setAsciiModalIsOpen] = useState(false);
     const [unicodeModalIsOpen, setUnicodeModalIsOpen] = useState(false);
+    const [resultModalIsOpen, setResultModalIsOpen] = useState(false);
 
     
     const levelAsNumber = parseInt(currentLevel, 10);
@@ -127,10 +128,28 @@ function GameScreen() {
         </Modal>
       );
 
+      const ResultModal = ({ isOpen, closeModal }) => (
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={closeModal}
+          contentLabel="Ergebnis"
+        
+        >
+          <div>
+            <h2>Herzlichen Glückwunsch!</h2>
+            <p>Du hast alle Aufgaben erfolgreich gelöst!</p>
+            <button onClick={closeModal}>Schließen</button>
+          </div>
+        </Modal>
+      );
+
       const openAsciiModal = () => setAsciiModalIsOpen(true);
       const closeAsciiModal = () => setAsciiModalIsOpen(false);
       const openUnicodeModal = () => setUnicodeModalIsOpen(true);
       const closeUnicodeModal = () => setUnicodeModalIsOpen(false);
+
+      const openResultModal = () => setResultModalIsOpen(true);
+      const closeResultModal = () => setResultModalIsOpen(false);
 
       const TypewriterTaskScroll = ({ taskText }) => {
         const [displayedText, setDisplayedText] = useState('');
@@ -186,9 +205,20 @@ function GameScreen() {
               if (prevIndex < tasks[currentLevel].length - 1) {
                 return prevIndex + 1;
               } else {
+                const isLastLevel = currentLevel === tasks.length - 1;
+                const areAllTasksSolved = AllTasksSolved();
+
+                if (isLastLevel && areAllTasksSolved) {
+                  openResultModal();
+                }
+                else if (isLastLevel && !areAllTasksSolved) {
+                  setMessage("Richtig! Du hast 10 Punkte für diese Antwort bekommen, aber du hast noch nicht alle Aufgaben gelöst. Gehe zurück zu den Aufgaben, die du noch nicht gelöst hast.")
+                }
+                else {
                 setCurrentLevel((prevLevel) => prevLevel + 1);
                 return 0; 
               }
+            }
             });
           } else {
             setMessage("Leider falsch! Schaue dir noch einmal die Erklärungen an.");
@@ -202,7 +232,11 @@ function GameScreen() {
     };
     
     
-    
+    const AllTasksSolved = () => {
+      const totalTasks = tasks.flat().length;
+      const totalSolvedTasks = solvedTasks.flat().length;
+      return totalSolvedTasks === totalTasks;
+    };
 
     const handleOptionClick = (selectedOption) => {
       const optionElement = document.getElementById(selectedOption);
