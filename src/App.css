@@ -52,6 +52,7 @@
 
   .popup-content {
     overflow-y: auto;
+    height: 75%;
   }
 }
 
