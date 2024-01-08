@@ -4,7 +4,7 @@ import ASCIIExpl from './ASCIIExplain';
 import UnicodeExpl from './UnicodeExplain';
 import TaskScroll from './TaskScroll';
 import tasks from './Tasks'; 
-import MyPdfViewer from './MyPdfViewer';
+import Modal from 'react-modal';
 
 
 
@@ -36,6 +36,9 @@ function GameScreen() {
     const [solvedTasks, setSolvedTasks] = useState(Array.from({ length: 10 }, () => []));
     const [showGame, setShowGame] = useState(false);
     const [animationComplete, setAnimationComplete] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [asciiModalIsOpen, setAsciiModalIsOpen] = useState(false);
+    const [unicodeModalIsOpen, setUnicodeModalIsOpen] = useState(false);
 
     
     const levelAsNumber = parseInt(currentLevel, 10);
@@ -56,6 +59,8 @@ function GameScreen() {
       initializeBackgroundImage(); 
     }, []);
 
+
+
       useEffect(() => {
         if (score !== 0) {
           setScoreAnimation(true);
@@ -72,6 +77,60 @@ function GameScreen() {
         return () => clearTimeout(timeoutID);
       }, []);
 
+      const openModal = () => {
+        setModalIsOpen(true);
+      }
+    
+      const closeModal = () => {
+        setModalIsOpen(false);
+      }
+
+      const AsciiModal = ({ isOpen, closeModal }) => (
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={closeModal}
+          contentLabel="ASCII Erklärung"
+          style={{
+            content: {
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            },
+          }}
+        >
+          <div>
+            <button className="ModalButton" onClick={closeModal}>Schließen</button>
+            <ASCIIExpl/>
+          </div>
+        </Modal>
+      );
+
+      const UnicodeModal = ({ isOpen, closeModal }) => (
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={closeModal}
+          contentLabel="Unicode Erklärung"
+          style={{
+            content: {
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            },
+          }}
+        >
+          <div>
+            <button className="ModalButton" onClick={closeModal}>Schließen</button>
+            <UnicodeExpl/>
+          </div>
+        </Modal>
+      );
+
+      const openAsciiModal = () => setAsciiModalIsOpen(true);
+      const closeAsciiModal = () => setAsciiModalIsOpen(false);
+      const openUnicodeModal = () => setUnicodeModalIsOpen(true);
+      const closeUnicodeModal = () => setUnicodeModalIsOpen(false);
 
       const TypewriterTaskScroll = ({ taskText }) => {
         const [displayedText, setDisplayedText] = useState('');
@@ -196,12 +255,14 @@ function GameScreen() {
     ))}
   </div>
   <div className="button-container">
-            <button  type="button" className="button" href="Ascii.pdf" onClick={handleLevelClick}>
+            <button  type="button" className="button" onClick={openAsciiModal}>
               ASCII Erklärung
             </button>
-            <button className="button" onClick={handleLevelClick}>
+            <AsciiModal isOpen={asciiModalIsOpen} closeModal={closeAsciiModal} />
+            <button className="button" onClick={openUnicodeModal}>
               Unicode Erklärung
             </button>
+            <UnicodeModal isOpen={unicodeModalIsOpen} closeModal={closeUnicodeModal} />
           </div>
   <div className="task-container">
     <div className="task-progress">
@@ -255,33 +316,6 @@ function GameScreen() {
               </div>
             )}
           </div>
-          {showAsciiPopup && (
-            <div className="popup">
-              <div className="popup-content">
-                <div className="popup-header">
-                  <h2>ASCII Erklärung</h2>
-                  <button className="close" onClick={() => setShowAsciiPopup(false)}>
-                    X
-                  </button>
-                </div>
-                <ASCIIExpl />
-                <button className="button" onClick={() => setShowAsciiPopup(false)}>
-                  Schließen
-                </button>
-              </div>
-            </div>
-          )}
-          {showUnicodePopup && (
-            <div className="popup">
-              <div className="popup-content">
-                <h2>Unicode Erklärung</h2>
-                <UnicodeExpl />
-                <button className="button" onClick={() => setShowUnicodePopup(false)}>
-                  Schließen
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       ) : null;
           }      
