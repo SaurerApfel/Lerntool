@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.284b987b.css",
-    "main.js": "/static/js/main.24d91273.js",
-    "static/js/787.d84019bb.chunk.js": "/static/js/787.d84019bb.chunk.js",
-    "static/media/tempel8.jpeg": "/static/media/tempel8.c85dfa294f4fd6ea0563.jpeg",
-    "static/media/tempel7.jpeg": "/static/media/tempel7.0b7b196f1c0b39aa9cee.jpeg",
-    "static/media/tempel2.jpeg": "/static/media/tempel2.0c0f1b59bf433f19109a.jpeg",
-    "static/media/tempel6.jpeg": "/static/media/tempel6.90104c9b4b4c0ab7b7a4.jpeg",
-    "static/media/eingang.jpeg": "/static/media/eingang.c1b22f80673e45092c01.jpeg",
-    "static/media/tempel3.jpeg": "/static/media/tempel3.81e99558ee6b2f08c93e.jpeg",
-    "static/media/tempel1.jpeg": "/static/media/tempel1.2657c93b845405799e77.jpeg",
-    "static/media/tempel.jpeg": "/static/media/tempel.acc905902d4794750bf4.jpeg",
-    "static/media/tempel5.jpeg": "/static/media/tempel5.1c70a6ea98f4cdd2bd7a.jpeg",
-    "static/media/tempel10.jpeg": "/static/media/tempel10.5d689559399f0481e9ba.jpeg",
-    "static/media/tempel9.jpeg": "/static/media/tempel9.497aa4f3ff8ed4be4072.jpeg",
-    "static/media/tempel4.jpeg": "/static/media/tempel4.85c4964a5912dd180317.jpeg",
-    "static/media/Ascii.pdf": "/static/media/Ascii.c7f5613577f040cf74cb.pdf",
-    "index.html": "/index.html",
-    "main.284b987b.css.map": "/static/css/main.284b987b.css.map",
-    "main.24d91273.js.map": "/static/js/main.24d91273.js.map",
-    "787.d84019bb.chunk.js.map": "/static/js/787.d84019bb.chunk.js.map"
+    "main.css": "/tool/static/css/main.284b987b.css",
+    "main.js": "/tool/static/js/main.07f19304.js",
+    "static/js/787.d84019bb.chunk.js": "/tool/static/js/787.d84019bb.chunk.js",
+    "static/media/tempel8.jpeg": "/tool/static/media/tempel8.c85dfa294f4fd6ea0563.jpeg",
+    "static/media/tempel7.jpeg": "/tool/static/media/tempel7.0b7b196f1c0b39aa9cee.jpeg",
+    "static/media/tempel2.jpeg": "/tool/static/media/tempel2.0c0f1b59bf433f19109a.jpeg",
+    "static/media/tempel6.jpeg": "/tool/static/media/tempel6.90104c9b4b4c0ab7b7a4.jpeg",
+    "static/media/eingang.jpeg": "/tool/static/media/eingang.c1b22f80673e45092c01.jpeg",
+    "static/media/tempel3.jpeg": "/tool/static/media/tempel3.81e99558ee6b2f08c93e.jpeg",
+    "static/media/tempel1.jpeg": "/tool/static/media/tempel1.2657c93b845405799e77.jpeg",
+    "static/media/tempel.jpeg": "/tool/static/media/tempel.acc905902d4794750bf4.jpeg",
+    "static/media/tempel5.jpeg": "/tool/static/media/tempel5.1c70a6ea98f4cdd2bd7a.jpeg",
+    "static/media/tempel10.jpeg": "/tool/static/media/tempel10.5d689559399f0481e9ba.jpeg",
+    "static/media/tempel9.jpeg": "/tool/static/media/tempel9.497aa4f3ff8ed4be4072.jpeg",
+    "static/media/tempel4.jpeg": "/tool/static/media/tempel4.85c4964a5912dd180317.jpeg",
+    "static/media/Ascii.pdf": "/tool/static/media/Ascii.c7f5613577f040cf74cb.pdf",
+    "index.html": "/tool/index.html",
+    "main.284b987b.css.map": "/tool/static/css/main.284b987b.css.map",
+    "main.07f19304.js.map": "/tool/static/js/main.07f19304.js.map",
+    "787.d84019bb.chunk.js.map": "/tool/static/js/787.d84019bb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.284b987b.css",
-    "static/js/main.24d91273.js"
+    "static/js/main.07f19304.js"
   ]
 }
