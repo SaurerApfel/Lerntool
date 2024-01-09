@@ -173,8 +173,11 @@ function GameScreen() {
       if (currentTask.type === 'input') {
         if (!solvedTasks[currentLevel].includes(currentTaskIndex)) {
           if (solution.trim() === currentTask.correctAnswer) {
-            setScore((prevScore) => prevScore + 10 + levelAsNumber);
-            setMessage("Richtig! Du hast 10 Punkte für diese Antwort bekommen.");
+            setScore((prevScore) => {
+              const newScore = prevScore + 10 + levelAsNumber;
+              setMessage(`Richtig! Du hast ${10 + levelAsNumber} Punkte für diese Antwort bekommen. Dein aktueller Punktestand: ${newScore}`);
+              return newScore;
+            });
             setSolvedTasks((prevSolvedTasks) => {
               const updatedSolvedTasks = [...prevSolvedTasks];
               updatedSolvedTasks[currentLevel] = [...updatedSolvedTasks[currentLevel], currentTaskIndex];
@@ -201,7 +204,7 @@ function GameScreen() {
             }
             });
           } else {
-            setMessage("Leider falsch! Schaue dir noch einmal die Erklärungen an.");
+            setMessage("Leider falsch. Schaue dir noch einmal die Erklärungen an.");
             setScore((prevScore) => (prevScore >= 5 ? prevScore - 1 : 0));
           }
         } else {
@@ -227,8 +230,11 @@ function GameScreen() {
         setTimeout(() => {
           optionElement.classList.remove("glowing");
           if (selectedOption === tasks[currentLevel][currentTaskIndex].correctAnswer) {
-            setScore((prevScore) => prevScore + 10 + levelAsNumber);
-            setMessage("Richtig! Du hast 10 Punkte für diese Antwort bekommen.");
+            setScore((prevScore) => {
+            const newScore = prevScore + 10 + levelAsNumber;
+            setMessage(`Richtig! Du hast ${10 + levelAsNumber} Punkte für diese Antwort bekommen. Dein aktueller Punktestand: ${newScore}`);
+            return newScore;
+          });
             setCurrentTaskIndex((prevIndex) => prevIndex + 1);
             setSolvedTasks((prevSolvedTasks) => {
               const updatedSolvedTasks = [...prevSolvedTasks];
