@@ -15,7 +15,7 @@ const ASCIIExpl = () => {
       <div>
         <Document
           file={file}
-          onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+    onLoadSuccess={({ numPages }) => setNumPages(numPages)} 
         >
           <Page pageNumber={1} 
               renderTextLayer={false}

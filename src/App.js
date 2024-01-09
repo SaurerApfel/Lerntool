@@ -13,7 +13,6 @@ const [showPopup, setShowPopup] = useState(true);
     setShowPopup(false);
   };
   
-
   useEffect(() => {
     document.body.style.backgroundImage = `url(${initialBackgroundImage})`;
     document.body.style.backgroundSize = '100% 100%';
