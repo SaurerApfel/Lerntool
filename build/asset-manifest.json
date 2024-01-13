@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/Lerntool/static/css/main.f585099b.css",
-    "main.js": "/Lerntool/static/js/main.c0ed103b.js",
+    "main.css": "/Lerntool/static/css/main.e6b9fca8.css",
+    "main.js": "/Lerntool/static/js/main.057f5a07.js",
     "static/js/787.d84019bb.chunk.js": "/Lerntool/static/js/787.d84019bb.chunk.js",
-    "static/media/Unicode.pdf": "/Lerntool/static/media/Unicode.926d4580c3f2a0ac677e.pdf",
+    "static/media/Unicode.pdf": "/Lerntool/static/media/Unicode.a85fe29d406e7a768e35.pdf",
     "static/media/tempel8.jpeg": "/Lerntool/static/media/tempel8.c85dfa294f4fd6ea0563.jpeg",
     "static/media/tempel7.jpeg": "/Lerntool/static/media/tempel7.0b7b196f1c0b39aa9cee.jpeg",
     "static/media/tempel2.jpeg": "/Lerntool/static/media/tempel2.0c0f1b59bf433f19109a.jpeg",
@@ -16,14 +16,14 @@
     "static/media/tempel10.jpeg": "/Lerntool/static/media/tempel10.5d689559399f0481e9ba.jpeg",
     "static/media/tempel9.jpeg": "/Lerntool/static/media/tempel9.497aa4f3ff8ed4be4072.jpeg",
     "static/media/tempel4.jpeg": "/Lerntool/static/media/tempel4.85c4964a5912dd180317.jpeg",
-    "static/media/Ascii.pdf": "/Lerntool/static/media/Ascii.c7f5613577f040cf74cb.pdf",
+    "static/media/Ascii.pdf": "/Lerntool/static/media/Ascii.4ffcc19c99357efeed83.pdf",
     "index.html": "/Lerntool/index.html",
-    "main.f585099b.css.map": "/Lerntool/static/css/main.f585099b.css.map",
-    "main.c0ed103b.js.map": "/Lerntool/static/js/main.c0ed103b.js.map",
+    "main.e6b9fca8.css.map": "/Lerntool/static/css/main.e6b9fca8.css.map",
+    "main.057f5a07.js.map": "/Lerntool/static/js/main.057f5a07.js.map",
     "787.d84019bb.chunk.js.map": "/Lerntool/static/js/787.d84019bb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f585099b.css",
-    "static/js/main.c0ed103b.js"
+    "static/css/main.e6b9fca8.css",
+    "static/js/main.057f5a07.js"
   ]
 }

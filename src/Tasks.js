@@ -79,9 +79,9 @@ const tasks = [
   [
     {
       type: 'multipleChoice',
-      question: 'An der Wand steht der folgende 8-Bit-ASCII-Code: 01001000 0110010101101100 01101100 01101111 00100001. Deine Aufgabe ist es, diesen Code zu entschlüsseln.', 
+      question: 'An der Wand steht der folgende 8-Bit-ASCII-Code: 01001000 01100101 01101100 01101100 01101111 00100001. Deine Aufgabe ist es, diesen Code zu entschlüsseln.', 
         options: {
-          a: 'Hallo!', b: 'hallo!', c: 'Hallo?', d: 'Heute!',
+          a: 'Hello!', b: 'hallo!', c: 'Hallo?', d: 'Heute!',
         },
         correctAnswer: 'a',
       },
@@ -154,7 +154,7 @@ const tasks = [
       },
       {
         type: 'multipleChoice',
-        question: 'Bei ASCII existieren nur zwei verschiedene Varianten. Aber welche Unicode-Variante wird heute am häufigsten verwendet?',
+        question: 'Bei ASCII existieren nur zwei verschiedene Varianten. Bei Unicode ist es etwas komplizierter. Welche Unicode-Variante wird heute am häufigsten verwendet?',
         options:
         {
           a: 'UTF-8',

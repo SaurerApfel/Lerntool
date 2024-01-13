@@ -14,7 +14,6 @@ const [showPopup, setShowPopup] = useState(true);
 const [showFinalScreen, setShowFinalScreen] = useState(false);
 const [totalPoints, setTotalPoints] = useState(0);
 
-
     const closePopup = () => {
     setShowPopup(false);
   };
