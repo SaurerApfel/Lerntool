@@ -1,18 +1,29 @@
+// Startscreen, beim aufrufen der erscheint das Pop-up (showPopup)
+// nachdem Spiel starten geklickt wird, wird Pop-up geschlossen und GameScreen wird angezeigt.
 import React, { useState, useEffect } from 'react';
 import GameScreen from './GameScreen';
 import './GameScreen.css';
 import './App.css';
+import FinalScreen from './FinalScreen';
+
 
 function App() {
 
 const initialBackgroundImage = require('./pictures/eingang.jpeg');
 const [showPopup, setShowPopup] = useState(true);
+const [showFinalScreen, setShowFinalScreen] = useState(false);
+const [totalPoints, setTotalPoints] = useState(0);
 
 
     const closePopup = () => {
     setShowPopup(false);
   };
-  
+
+  const handleGameCompletion = (points) => {
+    setTotalPoints(points);
+    setShowFinalScreen(true);
+  };
+
   useEffect(() => {
     document.body.style.backgroundImage = `url(${initialBackgroundImage})`;
     document.body.style.backgroundSize = '100% 100%';
@@ -41,9 +52,7 @@ const [showPopup, setShowPopup] = useState(true);
               Bist du dir bei einem Rätsel unsicher, empfehle ich dir dort reinzuschauen. Im Spiel sind sie als Erklärungen gekennzeichnet. 
               An der Leiste, die du oben sehen kannst, kannst du erkennen auf welchem Level du dich befindest und wie viele
               du noch vor dir hast. Du kannst dich in dem Tempel zwar frei bewegen und dich in den einzelnen Räumen umsehen,
-              aber die letzte Tür öffnet sich nur, wenn alle anderen Türen im Tempel bereits geöffnet worden sind.
-              Viel Erfolg!
-              </p>
+              aber die letzte Tür öffnet sich nur, wenn alle anderen Türen im Tempel bereits geöffnet worden sind. Viel Erfolg!</p>
               <button className='button' onClick={closePopup}>Spiel Starten</button>
             </div>
           </div>
@@ -52,7 +61,11 @@ const [showPopup, setShowPopup] = useState(true);
         <header className="App-header" style={{ backgroundColor: 'transparent' }}>
           <div>
           </div>
-          <GameScreen/>
+          {showFinalScreen ? (
+        <FinalScreen totalPoints={totalPoints} />
+      ) : (
+        <GameScreen onGameCompletion={handleGameCompletion} />
+      )}
         </header>
       )}
     </div>

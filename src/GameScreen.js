@@ -1,3 +1,4 @@
+// Hauptkomponente, zuständig für den Spielablauf
 import React, { useState, useEffect } from 'react';
 import './GameScreen.css';
 import ASCIIExpl from './ASCIIExplain';
@@ -5,10 +6,9 @@ import UnicodeExpl from './UnicodeExplain';
 import TaskScroll from './TaskScroll';
 import tasks from './Tasks'; 
 import Modal from 'react-modal';
+import FinalScreen from './FinalScreen';
 
-
-
-function GameScreen() {
+const GameScreen = ({ onGameCompletion }) => {
 
   const levelBackgrounds = {
     0: require('./pictures/tempel.jpeg'),
@@ -24,28 +24,35 @@ function GameScreen() {
     10: require('./pictures/tempel10.jpeg'),
   };
 
-    const [currentLevel, setCurrentLevel] = useState("0");
+    const [currentLevel, setCurrentLevel] = useState(0);
     const [solution, setSolution] = useState("");
-    const [showAsciiPopup, setShowAsciiPopup] = useState(false);
-    const [showUnicodePopup, setShowUnicodePopup] = useState(false);
     const [score, setScore] = useState(0);
     const [message, setMessage] = useState("");
     const [scoreAnimation, setScoreAnimation] = useState(false);
     const [backgroundImage, setBackgroundImage] = useState("");
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [solvedTasks, setSolvedTasks] = useState(Array.from({ length: 10 }, () => []));
-    const [showGame, setShowGame] = useState(false);
     const [animationComplete, setAnimationComplete] = useState(false);
     const [asciiModalIsOpen, setAsciiModalIsOpen] = useState(false);
     const [unicodeModalIsOpen, setUnicodeModalIsOpen] = useState(false);
-    const [resultModalIsOpen, setResultModalIsOpen] = useState(false);
+    const [isEvaluationInProgress, setEvaluationInProgress] = useState(false);
+    const [totalPoints, setTotalPoints] = useState(0);
+    const [showFinalScreen, setShowFinalScreen] = useState(false);
 
     
     const levelAsNumber = parseInt(currentLevel, 10);
 
+    //Ist spiel beendet? Wenn ja mit punktzahl aufrufen, dann erscheint FinalScreen
+    const handleGameCompletion = (score) => {
+      onGameCompletion(score);
+    };
+
+    //Task-Bar
     const handleTaskClick = (index) => {
       setCurrentTaskIndex(index);
     };
+
+ //Background initialisiereen
 
     const initializeBackgroundImage = () => {
       const initialBackgroundImage = levelBackgrounds[currentLevel];
@@ -54,13 +61,11 @@ function GameScreen() {
       document.body.style.backgroundRepeat = 'no-repeat';
       document.body.style.backgroundPosition = 'center center';
     };
-  
+ 
     useEffect(() => {
       initializeBackgroundImage(); 
     }, []);
-
-
-
+//Score Animation
       useEffect(() => {
         if (score !== 0) {
           setScoreAnimation(true);
@@ -70,14 +75,16 @@ function GameScreen() {
         }
       }, [score]);
 
+      // überprüfe, ob alle Aufgaben richtig und wenn ja, beende spiel
       useEffect(() => {
-        const timeoutID = setTimeout(() => {
-          setShowGame(true);
-        }, 1000);
-        return () => clearTimeout(timeoutID);
-      }, []);
+        if (AllTasksSolved()) {
+          handleGameCompletion(score);
+        }
+      }, [solvedTasks]);
 
   
+
+  //ASCII-Erklärung
 
       const AsciiModal = ({ isOpen, closeModal }) => (
         <Modal
@@ -94,13 +101,18 @@ function GameScreen() {
             },
           }}
         >
-          <div>
-            <button className="ModalButton" onClick={closeModal}>Schließen</button>
-            <ASCIIExpl/>
-          </div>
-        </Modal>
+<div style={{ margin: 'auto', textAlign: 'center',}}>
+      <ASCIIExpl />
+      <div style={{ marginTop: '-70px' }}>
+        <button className="ModalButton" onClick={closeModal}>
+          Schließen
+        </button>
+      </div>
+    </div>
+  </Modal>
       );
 
+      //Unicode-Erklärung
       const UnicodeModal = ({ isOpen, closeModal }) => (
         <Modal
           isOpen={isOpen}
@@ -110,17 +122,21 @@ function GameScreen() {
           style={{
             content: {
               display: 'flex',
-              flexDirection: 'column',
+              flexDirection: 'column-reverse',
               alignItems: 'center',
               justifyContent: 'center',
             },
           }}
         >
-          <div>
-            <button className="ModalButton" onClick={closeModal}>Schließen</button>
-            <UnicodeExpl/>
-          </div>
-        </Modal>
+<div style={{ margin: 'auto', textAlign: 'center',}}>
+      <UnicodeExpl />
+      <div style={{ marginTop: '-70px' }}>
+        <button className="ModalButton" onClick={closeModal}>
+          Schließen
+        </button>
+      </div>
+    </div>
+  </Modal>
       );
 
       const openAsciiModal = () => setAsciiModalIsOpen(true);
@@ -128,30 +144,10 @@ function GameScreen() {
       const openUnicodeModal = () => setUnicodeModalIsOpen(true);
       const closeUnicodeModal = () => setUnicodeModalIsOpen(false);
 
-      const openResultModal = () => setResultModalIsOpen(true);
-      const closeResultModal = () => setResultModalIsOpen(false);
 
-      const TypewriterTaskScroll = ({ taskText }) => {
-        const [displayedText, setDisplayedText] = useState('');
-        const [currentIndex, setCurrentIndex] = useState(0);
-      
-        useEffect(() => {
-          if (currentIndex < taskText.length) {
-            const timeoutId = setTimeout(() => {
-              setDisplayedText((prevText) => prevText + taskText[currentIndex]);
-              setCurrentIndex((prevIndex) => prevIndex + 1);
-            }, 50);
-      
-            return () => clearTimeout(timeoutId);
-            setAnimationComplete(true);
-          }
-        }, [currentIndex, taskText]);
-      
-        return <TaskScroll taskText={displayedText} />;
-      };
+// Level-Bar funktionalität
 
       const handleLevelClick = (level) => {
-      setShowGame(false);
       setCurrentLevel(level);
       setCurrentTaskIndex(0);
       setSolvedTasks((prevSolvedTasks) => {
@@ -159,110 +155,116 @@ function GameScreen() {
         updatedSolvedTasks[level] = [];
         return updatedSolvedTasks;
       });
-      setTimeout(() => {
-        setShowGame(true);
-      }, 1800);
       const body = document.querySelector('body');
       body.style.backgroundImage = `url(${levelBackgrounds[level]})`;
       setBackgroundImage(`url(${levelBackgrounds[level]})`);
       };
 
-
-    const handleSubmit = () => {
-      const currentTask = tasks[currentLevel][currentTaskIndex];
-      if (currentTask.type === 'input') {
-        if (!solvedTasks[currentLevel].includes(currentTaskIndex)) {
-          if (solution.trim() === currentTask.correctAnswer) {
-            setScore((prevScore) => {
-              const newScore = prevScore + 10 + levelAsNumber;
-              setMessage(`Richtig! Du hast ${10 + levelAsNumber} Punkte für diese Antwort bekommen. Dein aktueller Punktestand: ${newScore}`);
-              return newScore;
-            });
-            setSolvedTasks((prevSolvedTasks) => {
-              const updatedSolvedTasks = [...prevSolvedTasks];
-              updatedSolvedTasks[currentLevel] = [...updatedSolvedTasks[currentLevel], currentTaskIndex];
-              return updatedSolvedTasks;
-            });
-    
-            setCurrentTaskIndex((prevIndex) => {
-              if (prevIndex < tasks[currentLevel].length - 1) {
-                return prevIndex + 1;
-              } else {
-                const isLastLevel = currentLevel === tasks.length - 1;
-                const areAllTasksSolved = AllTasksSolved();
-
-                if (isLastLevel && areAllTasksSolved) {
-                  openResultModal();
+//Auswertungsfunktion Input-Aufgaben
+      const handleSubmit = () => { 
+        const currentTask = tasks[currentLevel][currentTaskIndex];
+        if (currentTask.type === 'input') {
+          if (!solvedTasks[currentLevel].includes(currentTaskIndex)) {
+            if (solution.trim() === currentTask.correctAnswer) {
+              setScore((prevScore) => prevScore + 10 + levelAsNumber);
+              const num = 10 + levelAsNumber;
+              setMessage(`Richtig! Du hast ${num} Punkte für diese Antwort bekommen.`);
+              setSolvedTasks((prevSolvedTasks) => {
+                const updatedSolvedTasks = [...prevSolvedTasks];
+                updatedSolvedTasks[currentLevel] = [...updatedSolvedTasks[currentLevel], currentTaskIndex];
+                if (AllTasksSolved()) {
+                  handleGameCompletion(score);
                 }
-                else if (isLastLevel && !areAllTasksSolved) {
-                  setMessage("Richtig! Du hast 10 Punkte für diese Antwort bekommen, aber du hast noch nicht alle Aufgaben gelöst. Gehe zurück zu den Aufgaben, die du noch nicht gelöst hast.")
+                return updatedSolvedTasks;
+              });
+              setCurrentTaskIndex((prevIndex) => {
+                if (prevIndex < tasks[currentLevel].length - 1) {
+                  return prevIndex + 1;
+                } else {
+                  setCurrentLevel((prevLevel) => prevLevel + 1);
+                  return 0; 
                 }
-                else {
-                setCurrentLevel((prevLevel) => prevLevel + 1);
-                return 0; 
-              }
+              });
+            } else {
+              setMessage("Leider falsch! Schaue dir noch einmal die Erklärungen an.");
+              setScore((prevScore) => (prevScore >= 5 ? prevScore - 1 : 0));
             }
-            });
           } else {
-            setMessage("Leider falsch. Schaue dir noch einmal die Erklärungen an.");
-            setScore((prevScore) => (prevScore >= 5 ? prevScore - 1 : 0));
+            setMessage("Du hast diese Aufgabe bereits gelöst.");
           }
-        } else {
-          setMessage("Du hast diese Aufgabe bereits gelöst.");
         }
-      }
-      setSolution("");
-    };
+        if (AllTasksSolved()) {
+          handleGameCompletion(score);
+        }
+        setSolution("");
+      };
     
-    
+    //überprüfen ob alle 30 Aufgaben gelöst sind
     const AllTasksSolved = () => {
       const totalTasks = tasks.flat().length;
       const totalSolvedTasks = solvedTasks.flat().length;
       return totalSolvedTasks === totalTasks;
     };
 
+//Auswertungsfunktion Multiple-Choice
     const handleOptionClick = (selectedOption) => {
+      if (!isEvaluationInProgress) {
+        setEvaluationInProgress(true);
       const optionElement = document.getElementById(selectedOption);
-    
       if (optionElement) {
         optionElement.classList.add("glowing");
         if (!solvedTasks[currentLevel].includes(currentTaskIndex)) {
         setTimeout(() => {
           optionElement.classList.remove("glowing");
           if (selectedOption === tasks[currentLevel][currentTaskIndex].correctAnswer) {
-            setScore((prevScore) => {
-            const newScore = prevScore + 10 + levelAsNumber;
-            setMessage(`Richtig! Du hast ${10 + levelAsNumber} Punkte für diese Antwort bekommen. Dein aktueller Punktestand: ${newScore}`);
-            return newScore;
-          });
+            setScore((prevScore) => prevScore + 10 + levelAsNumber);
+            const num = 10 + levelAsNumber;
+            setMessage(`Richtig! Du hast ${num} Punkte für diese Antwort bekommen.`);
             setCurrentTaskIndex((prevIndex) => prevIndex + 1);
             setSolvedTasks((prevSolvedTasks) => {
               const updatedSolvedTasks = [...prevSolvedTasks];
               updatedSolvedTasks[currentLevel] = [...updatedSolvedTasks[currentLevel], currentTaskIndex];
+              if (AllTasksSolved()) {
+                handleGameCompletion(score);
+              }
               return updatedSolvedTasks;
             });
-    
             if (currentTaskIndex + 1 === tasks[currentLevel].length) {
+              if (currentLevel < 9) {
               setCurrentLevel((prevLevel) => (prevLevel === "0" ? "1" : prevLevel +1));
               setCurrentTaskIndex(0);
+              }
+              else {
+                setCurrentLevel((prevLevel) => (prevLevel));
+                setCurrentTaskIndex(2);
+              }
             }
           } else {
             setMessage("Leider falsch! Schaue dir noch einmal die Erklärungen an.");
-            setScore((prevScore) => (prevScore >= 5 ? prevScore - levelAsNumber - 3 : 0));
+            setScore((prevScore) => Math.max(prevScore - levelAsNumber - 3, 0));
           }
-    
+          if (AllTasksSolved()) {
+            handleGameCompletion(score);
+          }
           setSolution("");
-        }, 2500);
+          setEvaluationInProgress(false);
+        }, 2500); 
       }
       else {
         optionElement.classList.remove("glowing");
         setMessage("Du hast diese Aufgabe bereits gelöst.");
+        setEvaluationInProgress(false);
+        if (AllTasksSolved()) {
+          handleGameCompletion(score);
+        }
+        }
       }
     }
     };
 
+
       return (
-        <div className="game-container">
+<div className="game-container">
   <div className="level-bar">
     {Array.from({ length: 10 }, (_, index) => (
       <div
@@ -275,15 +277,15 @@ function GameScreen() {
     ))}
   </div>
   <div className="button-container">
-            <button  type="button" className="button" onClick={openAsciiModal}>
-              ASCII Erklärung
-            </button>
-            <AsciiModal isOpen={asciiModalIsOpen} closeModal={closeAsciiModal} />
-            <button className="button" onClick={openUnicodeModal}>
-              Unicode Erklärung
-            </button>
-            <UnicodeModal isOpen={unicodeModalIsOpen} closeModal={closeUnicodeModal} />
-          </div>
+    <button type="button" className="button" onClick={openAsciiModal}>
+      ASCII Erklärung
+    </button>
+    <AsciiModal isOpen={asciiModalIsOpen} closeModal={closeAsciiModal} />
+    <button className="button" onClick={openUnicodeModal}>
+      Unicode Erklärung
+    </button>
+    <UnicodeModal isOpen={unicodeModalIsOpen} closeModal={closeUnicodeModal} />
+  </div>
   <div className="task-container">
     <div className="task-progress">
       {Array.from({ length: tasks[currentLevel].length }, (_, index) => (
@@ -295,39 +297,40 @@ function GameScreen() {
           {index + 1}
         </div>
       ))}
-      </div>
-       <div className={`score-container ${scoreAnimation ? 'score-animation' : ''}`}>
-              <span className="score-text" >Punktestand:</span>
-              <span className="score-value">{score}</span>
-       </div>
-       </div>
-          <div className="task-container">
-            <div className="task-text">
-              <TaskScroll taskText={tasks[currentLevel][currentTaskIndex].question} />
-              {tasks[currentLevel][currentTaskIndex].type === 'multipleChoice' && (
-                <div className="options-container">
-                  {Object.entries(tasks[currentLevel][currentTaskIndex].options).map(([key, value]) => (
-                    <div key={key} id={key} className="option" onClick={() => handleOptionClick(key)}>
-                      {`${key}) ${value}`}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            {tasks[currentLevel][currentTaskIndex].type === 'input' && (
-              <div>
-                <input
-                  type="text"
-                  className="input-field"
-                  value={solution}
-                  onChange={(e) => setSolution(e.target.value)}
-                />
-                <button className="buttonSubmit" onClick={handleSubmit}>
-                Antwort bestätigen
-                </button>
+    </div>
+    <div className={`score-container ${scoreAnimation ? 'score-animation' : ''}`}>
+      <span className="score-text">Punktestand:</span>
+      <span className="score-value">{score}</span>
+    </div>
+  </div>
+
+  <div className="task-container">
+      <div className="task-text">
+        <TaskScroll taskText={tasks[currentLevel][currentTaskIndex].question} />
+        {tasks[currentLevel][currentTaskIndex].type === 'multipleChoice' && (
+          <div className="options-container">
+            {Object.entries(tasks[currentLevel][currentTaskIndex].options).map(([key, value]) => (
+              <div key={key} id={key} className="option" onClick={() => handleOptionClick(key)}>
+                {`${key}) ${value}`}
               </div>
-            )}
-            {message && (
+            ))}
+          </div>
+        )}
+      </div>
+    {tasks[currentLevel][currentTaskIndex].type === 'input' && (
+      <div>
+        <input
+          type="text"
+          className="input-field"
+          value={solution}
+          onChange={(e) => setSolution(e.target.value)}
+        />
+        <button className="buttonSubmit" onClick={handleSubmit}>
+          Antwort bestätigen
+        </button>
+      </div>
+    )}
+          {message && (
               <div className="popup-game">
                 <div className="popup-game-content">
                   <h2>{message}</h2>

@@ -1,3 +1,4 @@
+// Tafel auf der die Aufgabe angezeigt wird
 import React from 'react';
 
 const TaskScroll = ({ taskText }) => {

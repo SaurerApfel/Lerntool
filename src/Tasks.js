@@ -1,3 +1,7 @@
+// Komponente für die Aufgaben
+// 10x3[][]
+// Type kann entweder input oder multipleChoice sein
+// bei type 'multipleChoice' gibt es das zusätzliche Feld options
 const tasks = [
     // LVL 1
     [
@@ -13,9 +17,9 @@ const tasks = [
     },
     {
       type: 'multipleChoice',
-      question: 'Die letzte Aufgabe in diesem Raum ist eine Kombination aus den ersten zwei Aufgaben. Als erstes sollen die Binärzahlen 1101 und 1111 addiert werden und das Ergebnis aus dieser Addition in eine Dezimalzahl umgewandelt werden. Überlege dir gut, für welche Antwort du dich entscheiden möchtest! Falsche Antworten lassen dein Punktekonto schrumpfen.',
+      question: 'Die letzte Aufgabe in diesem Raum ist eine Kombination aus den ersten zwei Aufgaben. Als erstes sollen die Binärzahlen 1101 und 1111 addiert werden und das Ergebnis aus dieser Addition in eine Dezimalzahl umgewandelt werden. Überlege dir gut, für welche Antwort du dich entscheidest. Falsche Antworten lassen dein Punktekonto schrumpfen!',
       options: {
-        a: '20', b: '21', c: '22', d: '24',
+        a: '22', b: '24', c: '26', d: '28',
       },
       correctAnswer:"d",
     },
@@ -54,10 +58,10 @@ const tasks = [
   [
     {
         type: 'multipleChoice',
-        question: 'Welches der Zeichen gehört nicht zum 7-Bit-AsCII-Code?',
+        question: 'Welches der Zeichen gehört nicht zum 7-Bit-ASCII-Code?',
         options: {
-          a: '?', b: '@', c: '€', d: '?',
-        },
+          a: '?', b: '@', c: '€', d: '$',
+        },  
         correctAnswer:"c",
       },
     {
@@ -67,7 +71,7 @@ const tasks = [
     },
     {
         type: 'input',
-        question: 'Jetzt will ich sehen, ob du auch selbst etwas an die Wand mit der Hilfe von 0en und 1en schreiben kannst. Wie lautet der 8-Bit-ASCII-Code für das Wort Tempel?',
+        question: 'Jetzt will ich sehen, ob du auch selbst etwas an die Wand mit der Hilfe von 0en und 1en schreiben kannst. Wie lautet der 8-Bit-ASCII-Code für das Wort Tempel? Schreibe jeweils 8-Bit pro Buchstabe zusammen und trenne die einzelnen Buchstaben mit einem Leerzeichen',
         correctAnswer: '01010100 01100101 01101101 01110000 01100101 01101100',
       },
   ],
@@ -75,7 +79,7 @@ const tasks = [
   [
     {
       type: 'multipleChoice',
-      question: 'An der Wand steht der folgende 8-Bit-ASCII-Code  : 01001000 0110010101101100 01101100 01101111 00100001. Deine Aufgabe ist es, diesen Code zu entschlüsseln.', 
+      question: 'An der Wand steht der folgende 8-Bit-ASCII-Code: 01001000 0110010101101100 01101100 01101111 00100001. Deine Aufgabe ist es, diesen Code zu entschlüsseln.', 
         options: {
           a: 'Hallo!', b: 'hallo!', c: 'Hallo?', d: 'Heute!',
         },
@@ -142,7 +146,7 @@ const tasks = [
       },      
       {
         type: 'multipleChoice',
-        question: 'Was ist der Hauptunterschied zwischen ASCII mit 7 Bit und ASCII mit 8 Bit?',
+        question: 'Was ist der Hauptunterschied zwischen ASCII mit 7-Bit und ASCII mit 8-Bit?',
         options: {
           a: 'Die Anzahl der darstellbaren Zeichen', b: 'Die Verwendung von Buchstaben und Zahlen', c: 'Die Art der Codierung', d: 'Es gibt keinen Unterschied',
         },
@@ -150,10 +154,10 @@ const tasks = [
       },
       {
         type: 'multipleChoice',
-        question: 'Bei ASCII existieren zwei verschiedene Varianten. Aber welche Variante wird heute am häufigsten verwendet?',
+        question: 'Bei ASCII existieren nur zwei verschiedene Varianten. Aber welche Unicode-Variante wird heute am häufigsten verwendet?',
         options:
         {
-        a: 'UTF-8',
+          a: 'UTF-8',
           b: 'UTF-16',
           c: 'UTF-32',
           d: 'UTF-64',
@@ -187,7 +191,7 @@ const tasks = [
             type: 'multipleChoice',
             question: 'Dekodiere die ASCII-Dezimalzahlen "87, 105, 110, 100" und setze die einzelnen Buchstaben zu einem Wort zusammen',
             options: {
-              a: 'Wind', b: 'Feuer', c: 'Wasser', d: 'Erde'
+              a: 'Wind', b: 'Wild', c: 'Wand', d: 'Erde'
             },
             correctAnswer: 'a',
           }
