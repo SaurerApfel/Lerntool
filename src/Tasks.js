@@ -7,17 +7,17 @@ const tasks = [
     [
     {
       type: 'input',
-      question: 'Deine erste Aufgabe auf dem Weg nach draußen, besteht darin, die Binärzahl 100000 in eine Dezimalzahl umzuformen.',
+      question: 'Deine erste Aufgabe auf dem Weg nach draußen besteht darin, die Binärzahl 100000 in eine Dezimalzahl umzuformen.',
       correctAnswer:"32",
     },
     {
       type: 'input',
-      question: 'Binäre Zahlen lassen sich nicht nur in Dezimalzahlen umrechnen. Man kann sie auch untereinander addieren. Addiere die Binärzahlen 11001 und 11011',
+      question: 'Binäre Zahlen lassen sich nicht nur in Dezimalzahlen umrechnen. Man kann sie auch untereinander addieren. Addiere die Binärzahlen 11001 und 11011.',
       correctAnswer:"110100",
     },
     {
       type: 'multipleChoice',
-      question: 'Die letzte Aufgabe in diesem Raum ist eine Kombination aus den ersten zwei Aufgaben. Als erstes sollen die Binärzahlen 1101 und 1111 addiert werden und das Ergebnis aus dieser Addition in eine Dezimalzahl umgewandelt werden. Überlege dir gut, für welche Antwort du dich entscheidest. Falsche Antworten lassen dein Punktekonto schrumpfen!',
+      question: 'Die letzte Aufgabe in diesem Raum ist eine Kombination aus den ersten zwei Aufgaben. Als Erstes sollen die Binärzahlen 1101 und 1111 addiert werden und das Ergebnis aus dieser Addition in eine Dezimalzahl umgewandelt werden. Überlege dir gut, für welche Antwort du dich entscheidest. Falsche Antworten lassen dein Punktekonto schrumpfen!',
       options: {
         a: '22', b: '24', c: '26', d: '28',
       },
@@ -39,7 +39,7 @@ const tasks = [
         },
     {
       type: 'input',
-      question: 'Kannst du auch die Zeichen entziffern, die hier im Raum an der Wand stehen? Mal sehen, ob du die Folgen aus 0en und 1en entziffern kannst. Für welches Zeichen steht der ASCII Code 1000110?',
+      question: 'Kannst du auch die Zeichen entziffern, die hier im Raum an der Wand stehen? Mal sehen, ob du die Folgen aus 0en und 1en entziffern kannst. Für welches Zeichen steht der ASCII-Code 1000110?',
       correctAnswer: "F",
     },
     {
@@ -66,12 +66,12 @@ const tasks = [
       },
     {
       type: 'input',
-      question: 'Deine Rechenkünste sind nun gefragt. Wie viele einzelne Zeichen kann eine Zeichencodierung mit 16-bit codieren?',
+      question: 'Deine Rechenkünste sind nun gefragt. Wie viele einzelne Zeichen kann eine Zeichencodierung mit 16-Bit codieren?',
       correctAnswer:"65536",
     },
     {
         type: 'input',
-        question: 'Jetzt will ich sehen, ob du auch selbst etwas an die Wand mit der Hilfe von 0en und 1en schreiben kannst. Wie lautet der 8-Bit-ASCII-Code für das Wort Tempel? Schreibe jeweils 8-Bit pro Buchstabe zusammen und trenne die einzelnen Buchstaben mit einem Leerzeichen',
+        question: 'Jetzt will ich sehen, ob du auch selbst etwas an die Wand mit der Hilfe von 0en und 1en schreiben kannst. Wie lautet der 8-Bit-ASCII-Code für das Wort Tempel? Schreibe jeweils 8-Bit pro Buchstabe zusammen und trenne die einzelnen Buchstaben mit einem Leerzeichen.',
         correctAnswer: '01010100 01100101 01101101 01110000 01100101 01101100',
       },
   ],
@@ -87,7 +87,7 @@ const tasks = [
       },
     {
       type: 'input',
-      question: 'Wie du sicherlich weißt, sind Bits und Bytes nicht das gleiche. Aber trotzdem hängen sie miteinander zusammen. Aus wie vielen Bits besteht ein Byte?',
+      question: 'Wie du sicherlich weißt, sind Bits und Bytes nicht das Gleiche. Aber trotzdem hängen sie miteinander zusammen. Aus wie vielen Bits besteht ein Byte?',
       correctAnswer:"8",
     },
     {
@@ -169,7 +169,7 @@ const tasks = [
   [
       {
         type: 'multipleChoice',
-        question: 'Unicode kann teilweise  verwirrend sein. So viele Formate, so viele Möglichkeiten. Aber welche Aussage über Unicode stimmt überhaupt?',
+        question: 'Unicode kann teilweise verwirrend sein. So viele Formate, so viele Möglichkeiten. Aber welche Aussage über Unicode stimmt überhaupt?',
         options:
         {
           a: 'Unicode kann nur lateinische Buchstaben darstellen',
@@ -189,7 +189,7 @@ const tasks = [
         },
         {
             type: 'multipleChoice',
-            question: 'Dekodiere die ASCII-Dezimalzahlen "87, 105, 110, 100" und setze die einzelnen Buchstaben zu einem Wort zusammen',
+            question: 'Dekodiere die ASCII-Dezimalzahlen "87, 105, 110, 100" und setze die einzelnen Buchstaben zu einem Wort zusammen.',
             options: {
               a: 'Wind', b: 'Wild', c: 'Wand', d: 'Erde'
             },
@@ -262,7 +262,7 @@ const tasks = [
     },
     {
       type: 'multipleChoice',
-      question: '01001000 01100101 01101100 01101100 01101111 00101100  00100000 01110111 01101001 01100101 01101110 01100101 01110011 00101100 01110111 01101001 01100101 01100100 01100101 01110011. Welcher Satz wird durch diese UTF-8 Codierung repräsentiert?',
+      question: '01001000 01100101 01101100 01101100 01101111 00101100 00100000 01110111 01101001 01100101 01101110 01100101 01110011 00101100 01110111 01101001 01100101 01100100 01100101 01110011. Welcher Satz wird durch diese UTF-8 Codierung repräsentiert?',
       options: {
         a: 'Hello, wie geht es dir?', b: 'Hallo, wie geht es dir?', c: 'Hallo, was machst du?', d: 'Hello, was machst du?'
       },

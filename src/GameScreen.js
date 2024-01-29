@@ -150,11 +150,6 @@ const GameScreen = ({ onGameCompletion }) => {
       const handleLevelClick = (level) => {
       setCurrentLevel(level);
       setCurrentTaskIndex(0);
-      setSolvedTasks((prevSolvedTasks) => {
-        const updatedSolvedTasks = [...prevSolvedTasks];
-        updatedSolvedTasks[level] = [];
-        return updatedSolvedTasks;
-      });
       const body = document.querySelector('body');
       body.style.backgroundImage = `url(${levelBackgrounds[level]})`;
       setBackgroundImage(`url(${levelBackgrounds[level]})`);
@@ -162,12 +157,12 @@ const GameScreen = ({ onGameCompletion }) => {
 
 //Auswertungsfunktion Input-Aufgaben
       const handleSubmit = () => { 
+        const num = 10 + levelAsNumber;
         const currentTask = tasks[currentLevel][currentTaskIndex];
         if (currentTask.type === 'input') {
           if (!solvedTasks[currentLevel].includes(currentTaskIndex)) {
             if (solution.trim() === currentTask.correctAnswer) {
               setScore((prevScore) => prevScore + 10 + levelAsNumber);
-              const num = 10 + levelAsNumber;
               setMessage(`Richtig! Du hast ${num} Punkte für diese Antwort bekommen.`);
               setSolvedTasks((prevSolvedTasks) => {
                 const updatedSolvedTasks = [...prevSolvedTasks];
@@ -186,8 +181,8 @@ const GameScreen = ({ onGameCompletion }) => {
                 }
               });
             } else {
-              setMessage("Leider falsch! Schaue dir noch einmal die Erklärungen an.");
-              setScore((prevScore) => (prevScore >= 5 ? prevScore - 1 : 0));
+              setMessage("Leider falsch. Schaue dir noch einmal die Erklärungen an.");
+              setScore((prevScore) => (prevScore >= 1  ? prevScore - 1 : 0));
             }
           } else {
             setMessage("Du hast diese Aufgabe bereits gelöst.");
@@ -210,6 +205,7 @@ const GameScreen = ({ onGameCompletion }) => {
     const handleOptionClick = (selectedOption) => {
       if (!isEvaluationInProgress) {
         setEvaluationInProgress(true);
+        const num = 10 + levelAsNumber;
       const optionElement = document.getElementById(selectedOption);
       if (optionElement) {
         optionElement.classList.add("glowing");
@@ -218,7 +214,6 @@ const GameScreen = ({ onGameCompletion }) => {
           optionElement.classList.remove("glowing");
           if (selectedOption === tasks[currentLevel][currentTaskIndex].correctAnswer) {
             setScore((prevScore) => prevScore + 10 + levelAsNumber);
-            const num = 10 + levelAsNumber;
             setMessage(`Richtig! Du hast ${num} Punkte für diese Antwort bekommen.`);
             setCurrentTaskIndex((prevIndex) => prevIndex + 1);
             setSolvedTasks((prevSolvedTasks) => {
@@ -240,7 +235,7 @@ const GameScreen = ({ onGameCompletion }) => {
               }
             }
           } else {
-            setMessage("Leider falsch! Schaue dir noch einmal die Erklärungen an.");
+            setMessage("Leider falsch. Schaue dir noch einmal die Erklärungen an.");
             setScore((prevScore) => Math.max(prevScore - levelAsNumber - 3, 0));
           }
           if (AllTasksSolved()) {
