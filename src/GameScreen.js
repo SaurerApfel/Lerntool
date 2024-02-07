@@ -82,6 +82,10 @@ const GameScreen = ({ onGameCompletion }) => {
         }
       }, [solvedTasks]);
 
+      const levelSolved = (level) => {
+        return solvedTasks[level].length === tasks[level].length;
+      };
+
   
 
   //ASCII-Erklärung
@@ -145,14 +149,34 @@ const GameScreen = ({ onGameCompletion }) => {
       const closeUnicodeModal = () => setUnicodeModalIsOpen(false);
 
 
-// Level-Bar funktionalität
+      const findFirstUnsolvedTaskIndex = (level) => {
+        const tasksInLevel = tasks[level];
+        for (let index = 0; index < tasksInLevel.length; index++) {
+          if (!solvedTasks[level].includes(index)) {
+            return index;
+          }
+        }
+        return -1; // Falls alle Aufgaben gelöst wurden
+      };
+      
 
+
+// Level-Bar funktionalität
       const handleLevelClick = (level) => {
-      setCurrentLevel(level);
+        setCurrentLevel(level);
+        const firstUnsolvedTaskIndex = findFirstUnsolvedTaskIndex(level);
+        if (firstUnsolvedTaskIndex !== -1) {
+        setCurrentTaskIndex(firstUnsolvedTaskIndex);
+        const body = document.querySelector('body');
+        body.style.backgroundImage = `url(${levelBackgrounds[level]})`;
+        setBackgroundImage(`url(${levelBackgrounds[level]})`);
+      } 
+      else {
       setCurrentTaskIndex(0);
       const body = document.querySelector('body');
       body.style.backgroundImage = `url(${levelBackgrounds[level]})`;
       setBackgroundImage(`url(${levelBackgrounds[level]})`);
+      }
       };
 
 //Auswertungsfunktion Input-Aufgaben
@@ -261,15 +285,15 @@ const GameScreen = ({ onGameCompletion }) => {
       return (
 <div className="game-container">
   <div className="level-bar">
-    {Array.from({ length: 10 }, (_, index) => (
-      <div
-        key={index}
-        className={`level-indicator ${index === currentLevel ? 'current-level' : ''}`}
-        onClick={() => handleLevelClick(index)}
-      >
-        {index + 1}
-      </div>
-    ))}
+  {Array.from({ length: 10 }, (_, index) => (
+    <div
+      key={index}
+      className={`level-indicator ${index === currentLevel ? 'current-level' : ''} ${levelSolved(index) ? 'solved-level' : ''}`}
+      onClick={() => handleLevelClick(index)}
+    >
+      {index + 1}
+    </div>
+  ))}
   </div>
   <div className="button-container">
     <button type="button" className="button" onClick={openAsciiModal}>
@@ -283,15 +307,15 @@ const GameScreen = ({ onGameCompletion }) => {
   </div>
   <div className="task-container">
     <div className="task-progress">
-      {Array.from({ length: tasks[currentLevel].length }, (_, index) => (
-        <div
-          key={index}
-          className={`task-indicator ${index === currentTaskIndex ? 'current-task' : ''}`}
-          onClick={() => handleTaskClick(index)}
-        >
-          {index + 1}
-        </div>
-      ))}
+    {Array.from({ length: tasks[currentLevel].length }, (_, index) => (
+      <div
+        key={index}
+        className={`task-indicator ${index === currentTaskIndex ? 'current-task' : ''} ${solvedTasks[currentLevel].includes(index) ? 'solved-task' : ''}`}
+        onClick={() => handleTaskClick(index)}
+      >
+        {index + 1}
+      </div>
+    ))}
     </div>
     <div className={`score-container ${scoreAnimation ? 'score-animation' : ''}`}>
       <span className="score-text">Punktestand:</span>
